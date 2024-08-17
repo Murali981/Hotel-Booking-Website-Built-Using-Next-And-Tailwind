@@ -12,7 +12,7 @@ export default function Layout({ children }) {
       {/* The most important thing we need to keep in mind is , that we receive the children basically that's on the same level
        in our file structure And so in this case this page.js(whose route is localhost:3000/account/page.js) and all the nested 
         page.js (whose route are localhost:3000/account/profile/page.js and localhost:3000/reservations/page.js) will become 
-         the children of the layout (whose path is app->account->layout.js) */}
+         the children of this layout (whose path is app->account->layout.js) */}
     </div>
   );
 }
