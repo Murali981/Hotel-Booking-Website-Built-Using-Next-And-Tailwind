@@ -1,4 +1,5 @@
 import SelectCountry from "@/app/_components/SelectCountry";
+import UpdateProfileForm from "@/app/_components/UpdateProfileForm";
 
 export const metadata = {
   title: "Update profile",
@@ -6,9 +7,8 @@ export const metadata = {
 
 export default function Page() {
   // CHANGE
-  const countryFlag = "pt.jpg";
-  const nationality = "portugal";
 
+  const nationality = "portugal";
   return (
     <div>
       <h2 className="font-semibold text-2xl text-accent-400 mb-4">
@@ -19,56 +19,23 @@ export default function Page() {
         Providing the following information will make your check-in process
         faster and smoother. See you soon!
       </p>
-
-      <form className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
-        <div className="space-y-2">
-          <label>Full name</label>
-          <input
-            disabled
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label>Email address</label>
-          <input
-            disabled
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <label htmlFor="nationality">Where are you from?</label>
-            <img
-              src={countryFlag}
-              alt="Country flag"
-              className="h-5 rounded-sm"
-            />
-          </div>
-
-          <SelectCountry
-            name="nationality"
-            id="nationality"
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
-            defaultCountry={nationality}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label htmlFor="nationalID">National ID number</label>
-          <input
-            name="nationalID"
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
-          />
-        </div>
-
-        <div className="flex justify-end items-center gap-6">
-          <button className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
-            Update profile
-          </button>
-        </div>
-      </form>
+      <UpdateProfileForm>
+        <SelectCountry
+          name="nationality"
+          id="nationality"
+          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+          defaultCountry={nationality}
+        />
+        {/* The above <SelectCountry /> component is a server component because it is fetching data from a country API which gives 
+            back all the countries as a response and it is a async await , So we have to render this <SelectCountry /> component 
+             on the server because it is a server component as it fetches outside countries data using a country API but if you see 
+             this component is a child component of the UpdataProfileForm.js component which is a client component but the child of this
+             client component is a server component but according to the rules of next.js framework the children of client
+              components will be client components . So how do we fix this ?  The only way which we can render a server component
+            inside a client component is by passing it as a prop  */}
+      </UpdateProfileForm>
+      {/* <UpdateProfileForm> is a client component , So we are passing <SelectCountry /> component which is a server component
+       by passing it as a child prop to the <UpdateProfileForm> component */}
     </div>
   );
 }
