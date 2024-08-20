@@ -15,6 +15,7 @@ import "@/app/_styles/globals.css";
 
 import { Josefin_Sans } from "next/font/google";
 import Header from "./_components/Header";
+import { ReservationProvider } from "./_components/ReservationContext";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -43,7 +44,13 @@ export default function RootLayout({ children }) {
       >
         <Header />
         <div className="flex-1 px-8 py-12 grid">
-          <main className=" max-w-7xl  mx-auto w-full">{children}</main>
+          <main className=" max-w-7xl  mx-auto w-full">
+            <ReservationProvider>{children}</ReservationProvider>
+            {/* In the above <ReservationProvider></ReservationProvider> is a client component and the above children is the page
+             component  of whatever page that we are visiting. and the {children} is the server component . We will pass a server
+              component to the client component . In the above ,  {children} are already have been generated and also rendered 
+               on the server  */}
+          </main>
         </div>
       </body>
     </html>

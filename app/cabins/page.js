@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
 import Filter from "../_components/Filter";
+import ReservationReminder from "../_components/ReservationReminder";
 
 export const revalidate = 0; // We are making this route "localhost:3000/cabins" dynamic again. We are gonna force it to become
 // dynamic . We are setting the revalidate of this route to zero. It means the data will be always revalidated which effectively makes
@@ -54,6 +55,7 @@ export default function Page({ searchParams }) {
         {/* suspense react element takes a fallback prop where we are rendering a spinner when it tries to fetch the 
           cabins data from supabase using a supabase API */}
         <CabinList filter={filter} />
+        <ReservationReminder />
       </Suspense>
       {/* Inorder to stream a single piece of UI  and in particular the list of cabins that we have been working with.
            As we learned previously  we can use a loading.js file  inorder to implement streaming and show a loading indicator 
